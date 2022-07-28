@@ -7,5 +7,5 @@
 
 <div class="alert alert-success">
 
-  <strong>Bienvenido!</strong>.
+  <strong>Bienvenido!, probando</strong>.
 </div>
