@@ -12,9 +12,17 @@ class reservaEventoController{
             require_once('Views/vista/listareservaE.php');
         }
 	
-        function deleteEvento(){
-            $id=$_GET['id'];
-            reservaEvento::deleteReservaE($id);
+        function deleteReservaE(){
+            $idreserva = $_POST['idreserva'];
+            $boletos = $_POST['boletos'];
+          $idevento = $_POST['idevento'];
+            
+            $evento=evento::searchByIdEvento($idreserva);
+
+            $capacidad_dis = $evento->getCapacidad_dis();
+            $total = $capacidad_dis + $boletos;
+            reservaEvento::deleteReservaE($idreserva);
+           reservaEvento::updateboletos($total,$idevento);
             $this->showReservaE();
         }
         function updateshowSucursal(){
@@ -48,18 +56,41 @@ class reservaEventoController{
             
         }
 
-        function registerSucursal(){
-            require_once('Views/vista/agregarSucursal.php');
+        
+
+        function verEvento(){
+            $listaEventos = evento::allEventos();
+                require_once('Views/vista/verEventos.php');
+            }
+
+        function registerReserva(){
+            $id=$_GET['id'];
+            $evento=evento::searchByIdEvento($id);
+            require_once('Views/vista/agregarReservaE.php');
+        }
+        function confirmarEliminacion(){
+            $id=$_GET['id'];
+            $reserva=reservaEvento::searchByIdReservaE($id);
+            require_once('Views/vista/confirmareliminacion.php');
         }
 
-        function saveSucursal(){
-         
-            $estado=1;
+       
+        function  verMisReservas(){
+            $id=$_GET['id'];
+            $listaReservaE=reservaEvento::searchByIdReservaUsuario($id);
+            require_once('Views/vista/listarMisReservasE.php');
+        }
 
-            $sucursal = new sucursal(null, $_POST['nombre'],$_POST['ubicacion'],$_POST['extencionT'],$estado,$_POST['capacidad']);
-    
-        sucursal::saveSucursal($sucursal);
-            $this->showReservaE();
+
+        function saveReservaE(){
+         $boletos = $_POST['boletos'];
+         $idevento = $_POST['idevento'];
+         $capacidad_dis = $_POST['capacidad_dis'];
+         $total = $capacidad_dis - $boletos;
+     $reserva = new reservaEvento(null, $_POST['cliente'],$idevento,$boletos);
+        reservaEvento::saveReservaE($reserva);
+        reservaEvento::updateboletos($total,$idevento);
+            $this->verEvento();
         }
 }
 

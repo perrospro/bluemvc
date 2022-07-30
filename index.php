@@ -11,7 +11,5 @@ session_start();
 		$action='index';
 	};
 	require_once('Views/Layouts/layout.php');	
-
-
-
  ?>
+

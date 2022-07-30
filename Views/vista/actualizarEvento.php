@@ -2,7 +2,6 @@
 
 	<header>
 <?php
-    session_start();
   include('cabecera.php');
  ?>
 </header>
@@ -22,9 +21,15 @@
 
       <select class="form-control"  name="ubi" id="ubi">
                                 <?php foreach ( $listaSucursales  as $sucursal) {
+                                  if($sucursal->getNombre()== $evento->getUbi()){
+                                    ?>
+  <option value="<?php echo $sucursal->getId(); ?>" selected>  <?php echo $sucursal->getNombre();?> </option>
+                                    <?php
+                                  }else{
                                         ?>
-            <option value="<?php echo $sucursal->getId(); ?>" <?php if ($sucursal->getId() == $evento->getUbi()): ?>selected<?php endif; ?> >  <?php echo $sucursal->getNombre();?> </option>
+            <option value="<?php echo $sucursal->getId(); ?>">  <?php echo $sucursal->getNombre();?> </option>
                                <?php
+                                  }
                                    }
                                ?>
 

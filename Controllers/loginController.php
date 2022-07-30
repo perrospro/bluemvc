@@ -2,7 +2,7 @@
 class loginController{
 
     function bienvenido(){
-        require_once('Views/vista/bienvenido.php');
+        require_once('Views/vista/confirma.php');
     }
 
     function login(){
@@ -12,7 +12,7 @@ class loginController{
         $listaAdministradores = login::login();
         foreach($listaAdministradores as $lista){
             if($lista->getUsuario() == $user && $lista->getClave() == $pass){
-               $rol =  $lista->getIdusuario();
+               $rol =  $lista->getRol();
             $id =  $lista->getIdusuario();
             $user = $lista->getUsuario();
            

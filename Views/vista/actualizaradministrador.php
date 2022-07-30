@@ -1,7 +1,6 @@
 
 	<header>
 <?php
-    session_start();
   include('cabecera.php');
  ?>
 </header>

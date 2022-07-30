@@ -1,4 +1,3 @@
-
 	<header>
 <?php
   include('cabecera.php');
@@ -9,28 +8,14 @@
 <center>
 
 <div class="container">
-
-	<h2>Lista de reservas de Eventos</h2>
-	<a  class="btn btn-outline-info" href="?controller=reservaEvento&&action=verMisReservas&&id=<?php echo $_SESSION['idUser'] ?>">Ver mis reservas</a>
+	
+	<h2>Lista de reservas de mis reservas</h2>
 	<form class="form-inline" action="?controller=reservaEvento&action=searchReserva" method="post">
 		<div class="form-group row">
-			<div class="col-xs-4">
-                
-            <select class="form-control"  name="evento" id="evento">
-            <option value="">Buscar por evento</option>
-                                <?php foreach (  $listaEventos  as $evento) {?>
-                                    <option value="<?php echo $evento->getIdevento() ;?>"><?php echo $evento->getTema();?></option>
-                               <?php
-                                   }
-                               ?>
-
-                           </select>
-			</div>
+		
 		</div>
 		<div class="form-group row">
-			<div class="col-xs-4">
-				<button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-search"> </span> Buscar</button>
-			</div>
+			
 		</div>
 	</form>
 	<div class="table-responsive">
@@ -41,7 +26,7 @@
                  <th>Cliente</th>
                 <th>evento</th>
                 <th>boletos</th>
-					<th  style="text-align: center;">Acciones</th>
+					<th colspan="2" style="text-align: center;">Acciones</th>
 				</tr>
 				<tbody>
 					<?php foreach ( $listaReservaE  as $reservas) {?>

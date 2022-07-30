@@ -1,7 +1,6 @@
 
 	<header>
 <?php
-  session_start();
   include('cabecera.php');
  ?>
 </header>
@@ -41,14 +40,17 @@
     <li style="text-align:left ;" class="list-group-item">Fecha: <?php echo $evento->getFecha() ?>.</li>
     <li style="text-align:left ;" class="list-group-item">Hora de inicio:  <?php echo $evento->getHoraini() ?>.</li>
     <li style="text-align:left ;" class="list-group-item">Cupos disponibles:  <?php echo $evento->getCapacidad_dis() ?> / <?php echo $evento->getCapacidad_total() ?> </li>
-    <li style="text-align:left ;" class="list-group-item">Cupos disponibles:  <?php echo $_SESSION['user'] ?> / <?php echo $evento->getCapacidad_total() ?> </li>
   </ul>
+  
   <div class="card-body">
-    <a href="#" class="card-link">Registrarce</a>
-  </div>
+	<?php  if($evento->getCapacidad_dis() != 0){ ?>
+  <a  class="btn btn-primary" style="margin-top: 25px ;" href="?controller=reservaEvento&action=registerReserva&id=<?php echo $evento->getIdevento();?>" >registrarse</a>
+<?php }else { ?>
+	<a  class="btn btn-primary" style="margin-top: 25px ;" href="#" >Evento lleno</a>
+	<?php 
+}?>  
 </div>
-
-
+</div>
 					<?php } ?>
 			
 				</tbody>
